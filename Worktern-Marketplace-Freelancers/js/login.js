@@ -15,56 +15,56 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
    // Reference messages collection
-   var messagesRef = firebase.database().ref('messages');
+  var messagesRef = firebase.database().ref('user');
   
-   // Listen for form submit
-   document.getElementById('events').addEventListener('submit', submitForm);
-   
-   // Submit form
-   function submitForm(e){
-     e.preventDefault();
-   
-     // Get values
-     var name = getInputVal('name');
-     var caption = getInputVal('caption');
-     var description = getInputVal('description');
-     var status = getInputVal('status');
-     var NAME =getInputVal('NAME');
-     var image = getInputVal('imgInp');
-     var phone = getInputVal('phone');
-   
-     // Save message
-     saveMessage(name , caption , description , status  ,NAME,image, phone);
-   
-     // Show alert
-     document.querySelector('.alert').style.display = 'block';
-   
-     // Hide alert after 3 seconds
-     setTimeout(function(){
-       document.querySelector('.alert').style.display = 'none';
-     },3000);
-   
-     // Clear form
-     document.getElementById('events').reset();
-   }
-   
-   // Function to get get form values
-   function getInputVal(id){
-     return document.getElementById(id).value;
-   }
-   
-   // Save message to firebase
-   function saveMessage(NAME , caption , description , status  ,NAME,image, phone){
-     var newMessageRef = messagesRef.push();
-     newMessageRef.set({
-       name: name,
-       caption : caption,
-       description : description,
-       status : status,
-       NAME :NAME,
-       image: image,
-       phone : phone
-     });
-   }
+  // Listen for form submit
+  document.getElementById('registrationform').addEventListener('submit', submitForm);
+  
+  // Submit form
+  function submitForm(e){
+    e.preventDefault();
+  
+    // Get values
+   let name = document.querySelector('#name').value;
+   let email = document.querySelector('#email').value;
+   let password = document.querySelector('#password').value;
+   let bio = document.querySelector('#bio').value;
+   let job = document.querySelector('#job').value;
+   let interest = document.querySelector('#interest').value;
+ 
+  
+    // Save message
+    saveMessage(name, email, password, bio, job, interest) ;
+  
+    // Show alert
+    document.querySelector('.alert').style.display = 'block';
+  
+    // Hide alert after 3 seconds
+    setTimeout(function(){
+      document.querySelector('.alert').style.display = 'none';
+    },3000);
+    window.location="dashboard-completejobs.html";
+  
+    // Clear form
+    document.getElementById('registrationform').reset();
+  }
+  
+  // Function to get get form values
+  function getInputVal(id){
+    return document.getElementById(id).value;
+  }
+  
+  // Save message to firebase
+  function saveMessage(name, email, password, bio, job, interest){
+    var newMessageRef = messagesRef.push();
+    newMessageRef.set({
+        name: name,
+        email: email,
+        password: password,
+        bio: bio,
+        job: job,
+        Interest: interest
+    });
+  }
 
 
