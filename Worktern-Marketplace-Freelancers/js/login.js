@@ -43,6 +43,7 @@
     setTimeout(function(){
       document.querySelector('.alert').style.display = 'none';
     },3000);
+    window.location="dashboard-completejobs.html";
   
     // Clear form
     document.getElementById('registrationform').reset();
@@ -54,7 +55,7 @@
   }
   
   // Save message to firebase
-  function saveMessage(NAME , caption , description , status  ,NAME,image, phone){
+  function saveMessage(name, email, password, bio, job, interest){
     var newMessageRef = messagesRef.push();
     newMessageRef.set({
         name: name,
