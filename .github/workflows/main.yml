@@ -1,31 +1,19 @@
-- name: Telewire
-  uses: athul/telewire@v1.1.0
-  with:
-    # Chat to send: chat id or @channel_name
-    chat: 778077606
-    # Telegram Bot token
-    token: 924793036:AAGXdU3zxPiExw1n6E5LJLNlLOZ_xtxqYUg
-    # Job status
-    status: 
-    # Get Stars of the Repo
-    stargazers:  optional, default is ${{ github.event.repository.stargazers_count }}
-    # Number of Forks
-    forkers: # optional, default is ${{ github.event.repository.forks_count }}
-    # Issue Title
-    iu_title: # optional, default is ${{ github.event.issue.title }}
-    # Issue Number
-    iu_num: # optional, default is ${{ github.event.issue.number }}
-    # Issue Triggerer
-    iu_actor: # optional, default is ${{ github.event.issue.user.login }}
-    # Issue Body
-    iu_body: # optional, default is ${{ github.event.issue.body }}
-    # Issue Comment
-    iu_com: # optional, default is ${{github.event.comment.body}}
-    # State of the PR
-    pr_state: # optional, default is ${{ github.event.action }}
-    # PR Number
-    pr_num: # optional, default is ${{ github.event.number }}
-    # Title of the PR
-    pr_title: # optional, default is ${{ github.event.pull_request.title }}
-    # Body/Contents of the PR
-    pr_body: # optional, default is ${{ github.event.pull_request.body }}
+name: Build and Notify
+on:
+  push:
+  pull_request:
+    types: [opened,closed]
+  issues:
+    types: [opened, closed, reopened]
+  issue_comment:
+    types: [created]
+  watch:
+    types: [started]
+    
+   -name: <WorkFlow Name>
+      uses: athul/telewire@master
+      if: always()
+      with:
+        chat: ${{ secrets.chat }}
+        token: ${{ secrets.token }}
+        status: ${{ job.status }}
