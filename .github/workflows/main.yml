@@ -1,28 +1,15 @@
- -name: <WorkFlow Name>
-      uses: athul/telewire@master
-      if: always()
-      with:
-        chat: ${{ secrets.chat }}
-        token: ${{ secrets.token }}
-        status: ${{ job.status }}
+name: telegram message
+on: [push]
+jobs:
 
-
-name: Build and Notify
-on:
-  push:
-  pull_request:
-    types: [opened,closed]
-  issues:
-    types: [opened, closed, reopened]
-  issue_comment:
-    types: [created]
-  watch:
-    types: [started]
-    
-   -name: <WorkFlow Name>
-      uses: athul/telewire@master
-      if: always()
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: send custom message with args
+      uses: appleboy/telegram-action@master
       with:
-        chat: ${{ secrets.chat }}
-        token: ${{ secrets.token }}
-        status: ${{ job.status }}
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        args: The ${{ github.event_name }} event triggered first step
