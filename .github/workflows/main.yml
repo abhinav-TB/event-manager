@@ -1,36 +1,31 @@
-name: Build and Notify
-on:
-  push:
-  pull_request:
-    types: [opened,closed]
-  issues:
-    types: [opened, closed, reopened]
-  issue_comment:
-    types: [created]
-  watch:
-    types: [started]
-jobs:
-
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Set up Go 1.13
-      uses: actions/setup-go@v1
-      with:
-        go-version: 1.13
-      id: go
-
-    - name: Check out code into the Go module directory
-      uses: actions/checkout@v1
-
-    - name: Build
-      run: go build -v .
-      
-    - name: Statusoli
-      uses: athul/statusoli@master
-      if: always()
-      with:
-        chat: ${{ secrets.chat }}
-        token: ${{ secrets.token }}
+- name: Telewire
+  uses: athul/telewire@v1.1.0
+  with:
+    # Chat to send: chat id or @channel_name
+    chat: 
+    # Telegram Bot token
+    token: 
+    # Job status
+    status: 
+    # Get Stars of the Repo
+    stargazers: # optional, default is ${{ github.event.repository.stargazers_count }}
+    # Number of Forks
+    forkers: # optional, default is ${{ github.event.repository.forks_count }}
+    # Issue Title
+    iu_title: # optional, default is ${{ github.event.issue.title }}
+    # Issue Number
+    iu_num: # optional, default is ${{ github.event.issue.number }}
+    # Issue Triggerer
+    iu_actor: # optional, default is ${{ github.event.issue.user.login }}
+    # Issue Body
+    iu_body: # optional, default is ${{ github.event.issue.body }}
+    # Issue Comment
+    iu_com: # optional, default is ${{github.event.comment.body}}
+    # State of the PR
+    pr_state: # optional, default is ${{ github.event.action }}
+    # PR Number
+    pr_num: # optional, default is ${{ github.event.number }}
+    # Title of the PR
+    pr_title: # optional, default is ${{ github.event.pull_request.title }}
+    # Body/Contents of the PR
+    pr_body: # optional, default is ${{ github.event.pull_request.body }}
