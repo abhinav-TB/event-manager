@@ -1,0 +1,7 @@
+   - name: Statusoli
+      uses: athul/statusoli@master
+      if: always()
+      with:
+        chat: ${{ secrets.chat }}
+        token: ${{ secrets.token }}
+        status: ${{ job.status }}
